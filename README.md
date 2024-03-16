@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Instalação do ambiente
+
+nvm ls
+nvm install 18.16.0 lts
+nvm use 18.16.0
+npm install -g @angular/cli15.2.7

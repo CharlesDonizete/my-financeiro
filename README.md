@@ -32,3 +32,9 @@ nvm ls
 nvm install 18.16.0 lts
 nvm use 18.16.0
 npm install -g @angular/cli15.2.7
+
+## Cadstro do backend
+
+User cadastrado
+charles@email.com
+@Charles3618

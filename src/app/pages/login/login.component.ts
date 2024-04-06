@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(public formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    public formBuilder: FormBuilder,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
   loginForm: FormGroup;
 
@@ -24,6 +29,16 @@ export class LoginComponent {
   }
 
   loginUser() {
-    alert('Ok');
+    this.loginService
+      .login(this.dadosForm['email'].value, this.dadosForm['senha'].value)
+      .subscribe(
+        (token) => {
+          alert(token);
+          this.router.navigate(['/dashboard']);
+        },
+        (err) => {
+          alert('Ocorreu um erro');
+        }
+      );
   }
 }

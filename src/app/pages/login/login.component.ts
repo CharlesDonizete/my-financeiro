@@ -19,8 +19,8 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required]],
+      email: ['charles@email.com', [Validators.required, Validators.email]],
+      senha: ['@Charles3618', [Validators.required]],
     });
   }
 
@@ -31,14 +31,14 @@ export class LoginComponent {
   loginUser() {
     this.loginService
       .login(this.dadosForm['email'].value, this.dadosForm['senha'].value)
-      .subscribe(
-        (token) => {
+      .subscribe({
+        next: (token) => {
           alert(token);
           this.router.navigate(['/dashboard']);
         },
-        (err) => {
+        error: (err) => {
           alert('Ocorreu um erro');
-        }
-      );
+        },
+      });
   }
 }

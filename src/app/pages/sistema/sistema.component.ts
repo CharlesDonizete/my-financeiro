@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -7,8 +8,28 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./sistema.component.scss'],
 })
 export class SistemaComponent {
-  constructor(public menuService: MenuService) {}
+  constructor(
+    public menuService: MenuService,
+    public formBuilder: FormBuilder
+  ) {}
+
+  sistemaForm: FormGroup;
+
   ngOnInit() {
     this.menuService.menuSelecionado = 2;
+
+    this.sistemaForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+    });
+  }
+
+  dadosForm() {
+    return this.sistemaForm.controls;
+  }
+
+  enviar() {
+    var dados = this.dadosForm();
+
+    alert(dados['name'].value);
   }
 }

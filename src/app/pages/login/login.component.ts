@@ -33,7 +33,6 @@ export class LoginComponent {
       .login(this.dadosForm['email'].value, this.dadosForm['senha'].value)
       .subscribe({
         next: (token) => {
-          alert(token);
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {

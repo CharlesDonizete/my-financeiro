@@ -1,3 +1,109 @@
 <navbar></navbar>
 <sidebar></sidebar>
-<p>despesa works!</p>
+
+<div class="container-base">
+  <div class="content-page">
+    <div class="card-header">
+      <div class="card-title">Cadastro de Despesas</div>
+    </div>
+    <form class="form-page" [formGroup]="despesaForm" (submit)="enviar()">
+      <div class="row">
+        <div class="group-row">
+          <label for="name">Nome</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Nome"
+            formControlName="name"
+            required
+          />
+          <label
+            for="name"
+            class="error-input"
+            *ngIf="despesaForm.get('name')?.errors?.['required'] && despesaForm.get('name').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="group-row">
+          <label for="valor">Valor</label>
+          <input
+            type="number"
+            name="valor"
+            id="valor"
+            placeholder="Valor"
+            formControlName="valor"
+            required
+          />
+          <label
+            for="valor"
+            class="error-input"
+            *ngIf="despesaForm.get('valor')?.errors?.['required'] && despesaForm.get('valor').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="group-row">
+          <label for="data">Data de Vencimento</label>
+          <input
+            type="date"
+            name="data"
+            id="data"
+            placeholder="Data"
+            formControlName="data"
+            required
+          />
+          <label
+            for="data"
+            class="error-input"
+            *ngIf="despesaForm.get('data')?.errors?.['required'] && despesaForm.get('data').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="group-row">
+          <label for="name">Sistemas</label>
+          <ng-select
+            class="select-padrao"
+            bindLabel="name"
+            formControlName="sistemaSelect"
+            [(ngModel)]="sistemaSelect"
+            [items]="listSistemas"
+            [multiple]="false"
+            [clearable]="false"
+            [searchable]="false"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="group-row">
+          <label for="name">Categorias</label>
+          <ng-select
+            class="select-padrao"
+            bindLabel="name"
+            formControlName="categoriaSelect"
+            [(ngModel)]="categoriaSelect"
+            [items]="listCategorias"
+            [multiple]="false"
+            [clearable]="false"
+            [searchable]="false"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="group-row">
+          <input type="submit" value="Salvar" class="btn-primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

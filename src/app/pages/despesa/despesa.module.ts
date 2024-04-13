@@ -5,9 +5,19 @@ import { CommonModule } from '@angular/common';
 import { DespesaRoutingModule } from './despesa-routing.module';
 import { DespesaComponent } from './despesa.component';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [DespesaComponent],
-  imports: [CommonModule, DespesaRoutingModule, SidebarModule, NavbarModule],
+  imports: [
+    CommonModule,
+    DespesaRoutingModule,
+    SidebarModule,
+    NavbarModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgSelectModule,
+  ],
 })
 export class DespesaModule {}

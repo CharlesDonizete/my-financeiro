@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
 export class MenuService {
   constructor() {}
 
-  menuSelecionado: number;
+  menuSelecionado: number = 1;
 }

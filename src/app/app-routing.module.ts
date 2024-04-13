@@ -23,6 +23,23 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
+  {
+    path: 'sistema',
+    loadChildren: () =>
+      import('./pages/sistema/sistema.module').then((m) => m.SistemaModule),
+  },
+  {
+    path: 'categoria',
+    loadChildren: () =>
+      import('./pages/categoria/categoria.module').then(
+        (m) => m.CategoriaModule
+      ),
+  },
+  {
+    path: 'despesa',
+    loadChildren: () =>
+      import('./pages/despesa/despesa.module').then((m) => m.DespesaModule),
+  },
 ];
 
 @NgModule({

@@ -2,6 +2,7 @@ import { LoginService } from './../../services/login.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent {
   constructor(
     public formBuilder: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private authService: AuthService
   ) {}
 
   loginForm: FormGroup;
@@ -33,6 +35,8 @@ export class LoginComponent {
       .login(this.dadosForm['email'].value, this.dadosForm['senha'].value)
       .subscribe({
         next: (token) => {
+          this.authService.setToken(token);
+          this.authService.usuarioAutenticado(true);
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {

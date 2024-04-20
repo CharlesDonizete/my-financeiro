@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -22,11 +23,13 @@ const routes: Routes = [
       import('./pages/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'sistema',
     loadChildren: () =>
       import('./pages/sistema/sistema.module').then((m) => m.SistemaModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'categoria',
@@ -34,11 +37,13 @@ const routes: Routes = [
       import('./pages/categoria/categoria.module').then(
         (m) => m.CategoriaModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'despesa',
     loadChildren: () =>
       import('./pages/despesa/despesa.module').then((m) => m.DespesaModule),
+    canActivate: [AuthGuard],
   },
 ];
 

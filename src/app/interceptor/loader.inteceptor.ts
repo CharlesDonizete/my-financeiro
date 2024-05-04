@@ -52,18 +52,18 @@ export class LoaderInterceptor implements HttpInterceptor {
     let headers;
 
     if (req.url.includes('api.ipify.org')) {
-      headers: new HttpHeaders({
+      headers = new HttpHeaders({
         contentType: 'false',
         processData: 'false',
       });
     } else if (req.body instanceof FormData) {
-      headers: new HttpHeaders({
+      headers = new HttpHeaders({
         contentType: 'false',
         processData: 'false',
         Authorization: 'Bearer ' + this.authService.getToken,
       });
     } else {
-      headers: new HttpHeaders()
+      headers = new HttpHeaders()
         .append('accept', 'application/json')
         .append('Content-Type', 'application/json')
         .append('Authorization', 'Bearer ' + this.authService.getToken);

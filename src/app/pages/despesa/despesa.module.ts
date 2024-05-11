@@ -7,6 +7,7 @@ import { DespesaComponent } from './despesa.component';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [DespesaComponent],
@@ -18,6 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     FormsModule,
     NgSelectModule,
+    MatSlideToggleModule,
   ],
 })
 export class DespesaModule {}

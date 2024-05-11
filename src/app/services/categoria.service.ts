@@ -19,6 +19,6 @@ export class CategoriaService {
 
   ListaCategoriaUsuario = (emailUsuario: string) =>
     this.httpClient.get(
-      `${this.baseUrl}/ListaCategoriaUsuario?emailUsuario=${emailUsuario}`
+      `${this.baseUrl}/ListarCategoriasUsuario?emailUsuario=${emailUsuario}`
     );
 }

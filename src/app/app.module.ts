@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HTTPStatus, LoaderInterceptor } from './interceptor/loader.inteceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthGuard } from './guards/auth-guard.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const RxJS = [LoaderInterceptor, HTTPStatus];
 
@@ -23,6 +24,7 @@ const RxJS = [LoaderInterceptor, HTTPStatus];
     HttpClientModule,
     NgxSpinnerModule,
     FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthGuard,

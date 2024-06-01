@@ -102,6 +102,7 @@ export class SistemaComponent {
           )
           .subscribe((response) => {
             console.log(response);
+            this.ListaSistemasUsuario();
           }),
           (error) => console.error(error);
       }),

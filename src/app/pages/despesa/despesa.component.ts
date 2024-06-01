@@ -17,6 +17,47 @@ import { SistemaService } from 'src/app/services/sistema.service';
 })
 export class DespesaComponent {
   [x: string]: any;
+
+  tipoTela: number = 1; //1 listagem, 2 cadastro e 3 edição
+  tableListDespesas: Array<Despesa>;
+  id: string;
+  page: number = 1;
+  config: any;
+  paginacao: boolean = true;
+  itemsPorPagina: number = 10;
+
+  configpag() {
+    this.id = this.gerarIdParaConfigDePaginacao();
+
+    this.config = {
+      id: this.id,
+      currentPage: this.page,
+      itemsPerPage: this.itemsPorPagina,
+    };
+  }
+
+  gerarIdParaConfigDePaginacao() {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  ListaDespesaUsuario() {
+    this.tipoTela = 1;
+
+    this.despesaService
+      .ListaDespesaUsuario(this.authService.getEmailUser())
+      .subscribe((response: Array<Despesa>) => {
+        this.tableListDespesas = response;
+      }),
+      (error) => console.error(error);
+  }
+
   constructor(
     public menuService: MenuService,
     public formBuilder: FormBuilder,
@@ -37,6 +78,9 @@ export class DespesaComponent {
 
   ngOnInit() {
     this.menuService.menuSelecionado = 4;
+
+    this.configpag();
+    this.ListaDespesaUsuario();
 
     this.despesaForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -70,6 +114,7 @@ export class DespesaComponent {
       .AdicionarDespesa(item)
       .subscribe((response: Despesa) => {
         this.despesaForm.reset();
+        this.ListaDespesaUsuario();
       }),
       (error) => console.error(error);
   }
@@ -112,5 +157,25 @@ export class DespesaComponent {
 
   handleChagePago(item: any) {
     this.checked = item.checked as boolean;
+  }
+
+  cadastro() {
+    this.tipoTela = 2;
+    this.despesaForm.reset();
+  }
+
+  // edicao(id:number){
+
+  // }
+
+  mudarPage(event: any) {
+    this.page = event;
+    this.config.currentPage = this.page;
+  }
+
+  mudarItemsPorPage() {
+    this.page = 1;
+    this.config.currentPage = this.page;
+    this.config.itemsPerPage = this.itemsPorPagina;
   }
 }

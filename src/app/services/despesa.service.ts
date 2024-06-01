@@ -13,4 +13,9 @@ export class DespesaService {
 
   AdicionarDespesa = (despesa: Despesa) =>
     this.httpClient.post<Despesa>(`${this.baseUrl}/AdicionarDespesa`, despesa);
+
+  ListaDespesaUsuario = (emailUsuario: string) =>
+    this.httpClient.get(
+      `${this.baseUrl}/ListarDespesasUsuario?emailUsuario=${emailUsuario}`
+    );
 }

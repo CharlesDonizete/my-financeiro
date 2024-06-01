@@ -17,8 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
     SistemaRoutingModule,
     NavbarModule,
     SidebarModule,
-    FormsModule,
     ReactiveFormsModule,
+
+    FormsModule,
     NgxPaginationModule,
     NgSelectModule,
     MatIconModule,

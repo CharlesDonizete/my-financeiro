@@ -81,9 +81,9 @@ export class SistemaComponent {
 
     if (this.itemEdicao) {
       this.itemEdicao.nome = dados['name'].value;
-      (this.itemEdicao.nomePropriedade = ''),
-        (this.itemEdicao.mensagem = ''),
-        (this.itemEdicao.notificacoes = []);
+      this.itemEdicao.nomePropriedade = '';
+      this.itemEdicao.mensagem = '';
+      this.itemEdicao.notificacoes = [];
 
       this.sistemaService
         .AtualizarSistemaFinanceiro(this.itemEdicao)

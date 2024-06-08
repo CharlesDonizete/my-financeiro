@@ -18,4 +18,10 @@ export class DespesaService {
     this.httpClient.get(
       `${this.baseUrl}/ListarDespesasUsuario?emailUsuario=${emailUsuario}`
     );
+
+  ObterDespesa = (id: number) =>
+    this.httpClient.get(`${this.baseUrl}/ObterDespesa?id=${id}`);
+
+  AtualizarDespesa = (despesa: Despesa) =>
+    this.httpClient.put<Despesa>(`${this.baseUrl}/AtualizarDespesa`, despesa);
 }

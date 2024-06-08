@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="group-row">
           <label for="name">Sistemas</label>
           <ng-select
@@ -84,7 +84,7 @@
             [searchable]="false"
           />
         </div>
-      </div>
+      </div> -->
 
       <div class="row">
         <div class="group-row">
@@ -157,7 +157,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item.nome }}</td>
 
-            <td>Edit</td>
+            <td (click)="edicao(item.id)">Edit</td>
           </tr>
         </tbody>
       </table>

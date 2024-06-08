@@ -85,21 +85,38 @@ export class CategoriaComponent {
 
   enviar() {
     var dados = this.dadosForm();
-    let item = new Categoria();
-    item.nome = dados['name'].value;
-    item.id = 0;
-    item.idSistema = parseInt(this.sistemaSelect.id);
 
-    this.categoriaService
-      .AdicionarCategoria(item)
-      .subscribe((response: Categoria) => {
-        this.categoriaForm.reset();
-        this.ListaCategoriaUsuario();
-      }),
-      (error) => console.error(error);
+    if (this.itemEdicao) {
+      this.itemEdicao.nome = dados['name'].value;
+      this.itemEdicao.idSistema = parseInt(this.sistemaSelect.id);
+      this.itemEdicao.nomePropriedade = '';
+      this.itemEdicao.mensagem = '';
+      this.itemEdicao.notificacoes = [];
+
+      this.categoriaService
+        .AtualizarCategoria(this.itemEdicao)
+        .subscribe((response: Categoria) => {
+          this.categoriaForm.reset();
+          this.ListaCategoriaUsuario();
+        }),
+        (error) => console.error(error);
+    } else {
+      let item = new Categoria();
+      item.nome = dados['name'].value;
+      item.id = 0;
+      item.idSistema = parseInt(this.sistemaSelect.id);
+
+      this.categoriaService
+        .AdicionarCategoria(item)
+        .subscribe((response: Categoria) => {
+          this.categoriaForm.reset();
+          this.ListaCategoriaUsuario();
+        }),
+        (error) => console.error(error);
+    }
   }
 
-  ListaSistemasUsuario() {
+  ListaSistemasUsuario(id: number = null) {
     this.sistemaService
       .ListaSistemaUsuario(this.authService.getEmailUser())
       .subscribe((response: Array<SistemaFinanceiro>) => {
@@ -111,6 +128,10 @@ export class CategoriaComponent {
           item.name = x.nome;
 
           listSistemaFinanceiro.push(item);
+
+          if (id && id == x.id) {
+            this.sistemaSelect = item;
+          }
         });
 
         this.listSistemas = listSistemaFinanceiro;
@@ -131,5 +152,26 @@ export class CategoriaComponent {
     this.page = 1;
     this.config.currentPage = this.page;
     this.config.itemsPerPage = this.itemsPorPagina;
+  }
+
+  itemEdicao: Categoria;
+
+  edicao(id: number) {
+    this.categoriaService.ObterCategoria(id).subscribe(
+      (response: Categoria) => {
+        if (response) {
+          this.itemEdicao = response;
+          this.tipoTela = 2;
+
+          var dados = this.dadosForm();
+
+          dados['name'].setValue(this.itemEdicao.nome);
+
+          this.ListaSistemasUsuario(this.itemEdicao.idSistema);
+        }
+      },
+      (error) => console.error(error),
+      () => {}
+    );
   }
 }

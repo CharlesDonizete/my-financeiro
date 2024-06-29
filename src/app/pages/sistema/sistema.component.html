@@ -31,6 +31,114 @@
       </div>
       <div class="row">
         <div class="group-row">
+          <label for="mes">Mes Sistema</label>
+          <input
+            type="text"
+            name="mes"
+            id="mes"
+            placeholder="Mes"
+            formControlName="mes"
+            required
+          />
+          <label
+            for="mes"
+            class="error-input"
+            *ngIf="sistemaForm.get('mes')?.errors?.['required'] && sistemaForm.get('mes').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label for="ano">Ano Sistema</label>
+          <input
+            type="text"
+            name="ano"
+            id="ano"
+            placeholder="Ano"
+            formControlName="ano"
+            required
+          />
+          <label
+            for="ano"
+            class="error-input"
+            *ngIf="sistemaForm.get('ano')?.errors?.['required'] && sistemaForm.get('ano').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label for="diaFechamento">Dia de Fechamento</label>
+          <input
+            type="text"
+            name="diaFechamento"
+            id="diaFechamento"
+            placeholder="Dia de Fechamento"
+            formControlName="diaFechamento"
+            required
+          />
+          <label
+            for="diaFechamento"
+            class="error-input"
+            *ngIf="sistemaForm.get('diaFechamento')?.errors?.['required'] && sistemaForm.get('diaFechamento').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label for="mesCopia">Mês Cópia</label>
+          <input
+            type="text"
+            name="mesCopia"
+            id="mesCopia"
+            placeholder="Mês Cópia"
+            formControlName="mesCopia"
+            required
+          />
+          <label
+            for="ano"
+            class="error-input"
+            *ngIf="sistemaForm.get('ano')?.errors?.['required'] && sistemaForm.get('ano').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label for="anoCopia">Ano Cópia</label>
+          <input
+            type="text"
+            name="anoCopia"
+            id="anoCopia"
+            placeholder="Ano Cópia"
+            formControlName="anoCopia"
+            required
+          />
+          <label
+            for="ano"
+            class="error-input"
+            *ngIf="sistemaForm.get('ano')?.errors?.['required'] && sistemaForm.get('ano').touched"
+            >Campo Obrigatório</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <mat-slide-toggle
+            class="group-slide"
+            [color]="color"
+            [checked]="checked"
+            [disabled]="disabled"
+            (change)="handleChageGerarCopiaDespesa($event)"
+          >
+            Gerar copia da Despesa?
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
           <input type="submit" value="Salvar" class="btn-primary" />
         </div>
       </div>

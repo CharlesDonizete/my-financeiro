@@ -19,6 +19,10 @@ export class SistemaComponent {
   paginacao: boolean = true;
   itemsPorPagina: number = 10;
 
+  color = 'accent';
+  checked = false;
+  disabled = false;
+
   configpag() {
     this.id = this.gerarIdParaConfigDePaginacao();
 
@@ -69,6 +73,11 @@ export class SistemaComponent {
 
     this.sistemaForm = this.formBuilder.group({
       name: ['', [Validators.required]],
+      mes: ['', [Validators.required]],
+      ano: ['', [Validators.required]],
+      diaFechamento: ['', [Validators.required]],
+      mesCopia: ['', [Validators.required]],
+      anoCopia: ['', [Validators.required]],
     });
   }
 
@@ -81,6 +90,12 @@ export class SistemaComponent {
 
     if (this.itemEdicao) {
       this.itemEdicao.nome = dados['name'].value;
+      this.itemEdicao.mes = dados['mes'].value;
+      this.itemEdicao.ano = dados['ano'].value;
+      this.itemEdicao.diaFechamento = dados['diaFechamento'].value;
+      this.itemEdicao.gerarCopiaDespesa = this.checked;
+      this.itemEdicao.mesCopia = dados['mesCopia'].value;
+      this.itemEdicao.anoCopia = dados['anoCopia'].value;
       this.itemEdicao.nomePropriedade = '';
       this.itemEdicao.mensagem = '';
       this.itemEdicao.notificacoes = [];
@@ -96,12 +111,12 @@ export class SistemaComponent {
       let item = new SistemaFinanceiro();
       item.nome = dados['name'].value;
       item.id = 0;
-      item.mes = 0;
-      item.ano = 0;
-      item.diaFechamento = 0;
-      item.gerarCopiaDespesa = true;
-      item.mesCopia = 0;
-      item.anoCopia = 0;
+      item.mes = dados['mes'].value;
+      item.ano = dados['ano'].value;
+      item.diaFechamento = dados['diaFechamento'].value;
+      item.gerarCopiaDespesa = this.checked;
+      item.mesCopia = dados['mesCopia'].value;
+      item.anoCopia = dados['anoCopia'].value;
 
       this.sistemaService
         .AdicionarSistemaFinanceiro(item)
@@ -142,6 +157,12 @@ export class SistemaComponent {
           var dados = this.dadosForm();
 
           dados['name'].setValue(this.itemEdicao.nome);
+          dados['mes'].setValue(this.itemEdicao.mes);
+          dados['ano'].setValue(this.itemEdicao.ano);
+          dados['diaFechamento'].setValue(this.itemEdicao.diaFechamento);
+          this.checked = this.itemEdicao.gerarCopiaDespesa;
+          dados['mesCopia'].setValue(this.itemEdicao.mesCopia);
+          dados['anoCopia'].setValue(this.itemEdicao.anoCopia);
         }
       },
       (error) => console.error(error),
@@ -158,5 +179,9 @@ export class SistemaComponent {
     this.page = 1;
     this.config.currentPage = this.page;
     this.config.itemsPerPage = this.itemsPorPagina;
+  }
+
+  handleChageGerarCopiaDespesa(item: any) {
+    this.checked = item.checked as boolean;
   }
 }

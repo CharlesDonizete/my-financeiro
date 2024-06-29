@@ -20,7 +20,7 @@ import { DespesaComponent } from './despesa.component';
     NavbarModule,
     ReactiveFormsModule,
     FormsModule,
-    NgSelectModule,
+
     MatSlideToggleModule,
     NgxPaginationModule,
     NgSelectModule,

@@ -38,3 +38,7 @@ npm install -g @angular/cli15.2.7
 User cadastrado
 charles@email.com
 @Charles3618
+
+User cadastrado
+charles.santos@email.com
+bhF?:8

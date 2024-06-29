@@ -4,6 +4,7 @@ import { SistemaFinanceiro } from 'src/app/models/SistemaFinanceiro';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { SistemaService } from 'src/app/services/sistema.service';
+import { UsuarioSistemaFinanceiroService } from 'src/app/services/usuario-sistema.service';
 
 @Component({
   selector: 'sistema',
@@ -19,6 +20,13 @@ export class SistemaComponent {
   paginacao: boolean = true;
   itemsPorPagina: number = 10;
 
+  tableListUsuariosSistema: Array<any>;
+  id2: string;
+  page2: number = 1;
+  config2: any;
+  paginacao2: boolean = true;
+  itemsPorPagina2: number = 10;
+
   color = 'accent';
   checked = false;
   disabled = false;
@@ -30,6 +38,14 @@ export class SistemaComponent {
       id: this.id,
       currentPage: this.page,
       itemsPerPage: this.itemsPorPagina,
+    };
+
+    this.id2 = this.gerarIdParaConfigDePaginacao();
+
+    this.config2 = {
+      id: this.id2,
+      currentPage: this.page2,
+      itemsPerPage: this.itemsPorPagina2,
     };
   }
 
@@ -60,7 +76,8 @@ export class SistemaComponent {
     public menuService: MenuService,
     public formBuilder: FormBuilder,
     public sistemaService: SistemaService,
-    public authService: AuthService
+    public authService: AuthService,
+    public usuarioSistemaFinancieiroService: UsuarioSistemaFinanceiroService
   ) {}
 
   sistemaForm: FormGroup;
@@ -163,6 +180,8 @@ export class SistemaComponent {
           this.checked = this.itemEdicao.gerarCopiaDespesa;
           dados['mesCopia'].setValue(this.itemEdicao.mesCopia);
           dados['anoCopia'].setValue(this.itemEdicao.anoCopia);
+
+          this.ListarUsuariosSistema();
         }
       },
       (error) => console.error(error),
@@ -175,13 +194,73 @@ export class SistemaComponent {
     this.config.currentPage = this.page;
   }
 
+  mudarPage2(event: any) {
+    this.page2 = event;
+    this.config2.currentPage = this.page2;
+  }
+
   mudarItemsPorPage() {
     this.page = 1;
     this.config.currentPage = this.page;
     this.config.itemsPerPage = this.itemsPorPagina;
   }
 
+  mudarItemsPorPage2() {
+    this.page2 = 1;
+    this.config2.currentPage = this.page2;
+    this.config2.itemsPerPage = this.itemsPorPagina2;
+  }
+
   handleChageGerarCopiaDespesa(item: any) {
     this.checked = item.checked as boolean;
+  }
+
+  emailUsuarioSistema: string = '';
+  emailUsuarioSistemaValid: boolean = true;
+  textValid: string = 'Campo Obrigatório!';
+
+  ListarUsuariosSistema() {
+    this.usuarioSistemaFinancieiroService
+      .ListarUsuariosSistema(this.itemEdicao.id)
+      .subscribe((response: Array<any>) => {
+        this.tableListUsuariosSistema = response;
+      }),
+      (error) => console.error(error);
+  }
+
+  excluir(id: number) {
+    this.usuarioSistemaFinancieiroService
+      .DeleteUsuarioSistemaFinanceiro(id)
+      .subscribe(
+        (response: SistemaFinanceiro) => {
+          if (response) {
+            this.edicao(this.itemEdicao.id);
+            this.emailUsuarioSistema = '';
+          }
+        },
+        (error) => console.error(error),
+        () => {}
+      );
+  }
+
+  addUsuarioSistema() {
+    this.emailUsuarioSistemaValid = true;
+
+    if (!this.emailUsuarioSistema) {
+      this.emailUsuarioSistemaValid = false;
+    } else {
+      this.usuarioSistemaFinancieiroService
+        .CadastraUsuarioNoSistema(this.itemEdicao.id, this.emailUsuarioSistema)
+        .subscribe(
+          (response: any) => {
+            if (response) {
+              this.edicao(this.itemEdicao.id);
+              this.emailUsuarioSistema = '';
+            }
+          },
+          (error) => console.error(error),
+          () => {}
+        );
+    }
   }
 }

@@ -143,6 +143,113 @@
         </div>
       </div>
     </form>
+    <div
+      class="container-lis-user"
+      *ngIf="
+        tipoTela == 2 &&
+        this.itemEdicao &&
+        this.itemEdicao.id > 0 &&
+        tableListUsuariosSistema
+      "
+    >
+      <div class="content-page">
+        <div class="card-header">
+          <div class="header-info-2">
+            <div class="card-header">
+              <div class="card-title">Listagem de Usuarios do Sistema</div>
+            </div>
+          </div>
+          <div class="form-page">
+            <div class="row">
+              <div class="group-row">
+                <label>Informe o E-mail para add usuário no sistema</label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  [(ngModel)]="emailUsuarioSistema"
+                  placeholder="E-mail"
+                />
+                <label
+                  for="email"
+                  class="error-input"
+                  *ngIf="!emailUsuarioSistemaValid"
+                  >{{ textValid }}</label
+                >
+              </div>
+            </div>
+            <div class="row">
+              <div class="group-row">
+                <input
+                  type="submit"
+                  value="Add"
+                  class="btn-primary"
+                  (click)="addUsuarioSistema()"
+                />
+              </div>
+            </div>
+
+            <table cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <td>Código</td>
+                  <td>Nome</td>
+                  <td>Ação</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="select-item"
+                  *ngFor="
+                    let item of tableListUsuariosSistema | paginate : config;
+                    let i = index
+                  "
+                  class="linha-table"
+                  [ngClass]="{
+                    'linha-cinza': i % 2 == 0,
+                    'linha-branca': i % 2 !== 0
+                  }"
+                >
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.emailUsuario }}</td>
+
+                  <td (click)="excluir(item.id)">Excluir</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div
+              class="tabela-footer"
+              *ngIf="paginacao2 && tableListUsuariosSistema"
+            >
+              <label class="mostrar">Mostrar</label>
+              <ng-select
+                (change)="mudarItemsPorPage2()"
+                [(ngModel)]="itemsPorPagina2"
+                [clearable]="false"
+                [searchable]="false"
+                class="mostrar-drop"
+              >
+                <ng-option [value]="10">10</ng-option>
+                <ng-option [value]="50">50</ng-option>
+                <ng-option [value]="100">100</ng-option>
+              </ng-select>
+
+              <div class="container-pagination">
+                <pagination-controls
+                  id="{{ this.id2 }}"
+                  previousLabel="Anterior"
+                  nextLabel="Próximo"
+                  [responsive]="true"
+                  (pageChange)="mudarPage2($event)"
+                >
+                </pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

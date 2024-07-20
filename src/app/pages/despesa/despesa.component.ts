@@ -111,6 +111,7 @@ export class DespesaComponent {
       this.itemEdicao.nomePropriedade = '';
       this.itemEdicao.mensagem = '';
       this.itemEdicao.notificacoes = [];
+      this.itemEdicao.tipoDespesa = dados['tipoDespesa'].value;
 
       this.despesaService
         .AtualizarDespesa(this.itemEdicao)
@@ -127,6 +128,7 @@ export class DespesaComponent {
       item.id = 0;
       item.idCategoria = parseInt(this.categoriaSelect.id);
       item.pago = this.checked;
+      item.tipoDespesa = 1;
 
       this.despesaService
         .AdicionarDespesa(item)

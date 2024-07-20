@@ -24,4 +24,9 @@ export class DespesaService {
 
   AtualizarDespesa = (despesa: Despesa) =>
     this.httpClient.put<Despesa>(`${this.baseUrl}/AtualizarDespesa`, despesa);
+
+  CarregaGraficos = (emailUsuario: string) =>
+    this.httpClient.get(
+      `${this.baseUrl}/CarregaGraficos?emailUsuario=${emailUsuario}`
+    );
 }

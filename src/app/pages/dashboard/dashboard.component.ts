@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DespesaService } from 'src/app/services/despesa.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { SistemaService } from 'src/app/services/sistema.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ export class DashboardComponent {
   constructor(
     public menuService: MenuService,
     public despesaService: DespesaService,
-    public authService: AuthService
+    public authService: AuthService,
+    public sistemaService: SistemaService
   ) {}
   ngOnInit() {
     this.menuService.menuSelecionado = 1;
@@ -32,4 +34,14 @@ export class DashboardComponent {
         () => {}
       );
   }
+
+  ExecuteCopiaDespesasSistemaFinanceiro = () => {
+    this.sistemaService
+      .ExecuteCopiaDespesasSistemaFinanceiro()
+      .subscribe((response: any) => {
+        alert('Executado com Sucesso!');
+
+        this.CarregaGraficos();
+      });
+  };
 }

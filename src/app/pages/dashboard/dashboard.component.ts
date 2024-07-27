@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ObjetoGraficoModel } from 'src/app/models/ObjetoGraficoModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { DespesaService } from 'src/app/services/despesa.service';
 import { MenuService } from 'src/app/services/menu.service';
@@ -21,7 +22,7 @@ export class DashboardComponent {
     this.CarregaGraficos();
   }
 
-  objetoGrafico: any;
+  objetoGrafico: ObjetoGraficoModel;
 
   CarregaGraficos() {
     this.despesaService

@@ -2,6 +2,7 @@ import { Despesa } from './../models/Despesa';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environment';
+import { ObjetoGraficoModel } from '../models/ObjetoGraficoModel';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class DespesaService {
     this.httpClient.put<Despesa>(`${this.baseUrl}/AtualizarDespesa`, despesa);
 
   CarregaGraficos = (emailUsuario: string) =>
-    this.httpClient.get(
+    this.httpClient.get<ObjetoGraficoModel>(
       `${this.baseUrl}/CarregaGraficos?emailUsuario=${emailUsuario}`
     );
 }

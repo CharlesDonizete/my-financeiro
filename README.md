@@ -42,3 +42,7 @@ charles@email.com
 User cadastrado
 charles.santos@email.com
 bhF?:8
+
+##Comando para fazer a publicação
+
+ng build --base-href /MyFinanceiro/ --c production

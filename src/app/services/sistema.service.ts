@@ -1,7 +1,7 @@
 import { SistemaFinanceiro } from './../models/SistemaFinanceiro';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
